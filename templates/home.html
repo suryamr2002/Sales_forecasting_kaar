@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Sales Prediction App</title>
+   </head>
+   <body>
+      <h1>Sales Prediction App</h1>
+      <form method="POST">
+         <label for="state">State:</label>
+         <select name="state" id="state">
+            {% for state in states %}
+            <option value="{{ state }}">{{ state }}</option>
+            {% endfor %}
+         </select>
+         <br><br>
+         <label for="category">Category:</label>
+         <select name="category" id="category">
+            {% for category in categories %}
+            <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+         </select>
+         <br><br>
+         <label for="sub_category">Sub-Category:</label>
+         <select name="sub_category" id="sub_category">
+            {% for sub_category in sub_categories %}
+            <option value="{{ sub_category }}">{{ sub_category }}</option>
+            {% endfor %}
+         </select>
+         <br><br>
+         <label for="month">Month:</label>
+         <input type="text" name="month" id="month">
+         <br><br>
+         <label for="quarter">Quarter:</label>
+         <input type="text" name="quarter" id="quarter">
+         <br><br>
+         <label for="year">Year:</label>
+         <input type="text" name="year" id="year">
+         <br><br>
+         <input type="submit" value="Predict">
+      </form>
+   </body>
+</html>

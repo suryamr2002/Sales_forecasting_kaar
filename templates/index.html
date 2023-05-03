@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sales Prediction</title>
+	<link rel="stylesheet" href="static\style1.css">
+  </head>
+  <body>
+    <h1>Sales Prediction</h1>
+	<div class="grid-container">
+	<div class="inputs" grid-column="1">
+		<!-- <div class="image" grid-column="2">
+			<img src="static\1.jpg" alt="Image">
+		  </div> -->
+    <form action="/predict" method="post">
+
+      <label for="month">Month:</label>
+      <select name="month" id="month" required>
+		<option value="/">Select</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <br><br>
+      <label for="quarter">Quarter:</label>
+      <select name="quarter" id="quarter" >
+		<option value="">Select quarter</option>
+        <option value="1">Q1</option>
+        <option value="2">Q2</option>
+        <option value="3">Q3</option>
+        <option value="4">Q4</option>
+      </select>
+      <br><br>
+      <label for="year">Year:</label>
+      <input type="number" id="year" name="year" min="2000" max="2025" required>
+      <br><br>
+      <label for="state">State:</label>
+      <select name="state_code" id="state">
+		<option value="">Select a State </option>
+        <option value="0">Alabama</option>
+        <option value="1">Alaska</option>
+        <option value="2">Arizona</option>
+        <option value="3">Arkansas</option>
+        <option value="4">California</option>
+        <option value="5">Colorado</option>
+        <option value="6">Connecticut</option>
+        <option value="7">Delaware</option>
+        <option value="8">Florida</option>
+        <option value="9">Georgia</option>
+        <option value="10">Hawaii</option>
+      </select>
+      <br><br>
+      <label for="category">Category:</label>
+      <select name="category_code" id="category" onchange="updateSubCategories()" required>
+		<option value="/">Select</option>
+        <option value="0">Furniture</option>
+        <option value="1">Office Supplies</option>
+        <option value="2">Technology</option>
+      </select>
+      <br><br>
+
+      <label for="subcategory">Sub-Category:</label>
+      <select name="sub_category_code" id="subcategory">
+        <!-- <option value="0">Bookcases</option>
+        <option value="1">Chairs</option>
+        <option value="2">Furnishings</option>
+		<option value="3">Tables</option>
+		<option value="4">Appliances</option>
+		<option value="5">Art</option>
+		<option value="6">Binders</option>
+		<option value="7">Envelopes</option>
+		<option value="8">Fasteners</option>
+		<option value="9">Labels</option>
+		<option value="10">Paper</option>
+		<option value="11">Storage</option>
+		<option value="12">Supplies</option>
+		<option value="13">Accessories</option>
+		<option value="14">Phones</option>
+		<option value="15">Copiers</option>
+		<option value="16">Machines</option> -->
+      </select>
+	
+      <br><br>
+      <input type="submit" value="Predict" name="button" id="csv-download-btn">
+    </form>
+	
+	</div>
+	
+	
+	<script>
+		function updateSubCategories() {
+			var category = document.getElementById('category').value;
+			var subCategories = document.getElementById('subcategory');
+	
+			// Clear sub categories
+			subCategories.innerHTML = '';
+	
+			// Add appropriate options based on category
+			switch(category) {
+				case '':
+					subCategories.options.add(new Option('Select category Above', ''));
+					break;
+				case '0':
+					subCategories.options.add(new Option('Bookcases', '0'));
+					subCategories.options.add(new Option('Chairs', '1'));
+					subCategories.options.add(new Option('Tables', '3'));
+					subCategories.options.add(new Option('Art', '5'));
+					break;
+				case '1':
+					subCategories.options.add(new Option('Furnishings', '2'));
+					subCategories.options.add(new Option('Appliances', '4'));
+					subCategories.options.add(new Option('Binders', '6'));
+					subCategories.options.add(new Option('Fasteners', '8'));
+					subCategories.options.add(new Option('Labels', '9'));
+					subCategories.options.add(new Option('Paper', '10'));
+					subCategories.options.add(new Option('Supplies', '12'));
+					subCategories.options.add(new Option('Envelopes', '13'));
+					subCategories.options.add(new Option('Storage', '14'));
+					break;
+				case '2':
+					subCategories.options.add(new Option('Phones', '7'));
+					subCategories.options.add(new Option('Accessories', '11'));
+					subCategories.options.add(new Option('Copiers', '15'));
+					subCategories.options.add(new Option('Machines', '16'));
+					break;
+			}
+		}
+	</script>
+	
+
+	  
+	  
+	  
+	<script>
+		const monthInput = document.getElementById('month');
+		const quarterInput = document.getElementById('quarter');
+  
+		monthInput.addEventListener('change', () => {
+		  const month = monthInput.value;
+		  if (month >= 1 && month <= 3) {
+			quarterInput.value = 1;
+		  } else if (month >= 4 && month <= 6) {
+			quarterInput.value = 2;
+		  } else if (month >= 7 && month <= 9) {
+			quarterInput.value = 3;
+		  } else {
+			quarterInput.value = 4;
+		  }
+		});
+	  </script>
+	  <div class="output">
+		
+		{% if prediction %}
+		  <p>{{ prediction }} 🎉</p>
+		{% else %} 	
+			  <h1><centre><b>Enter the Values to Predict Sales:</b></centre></h1>
+			  <div class="image" grid-column="2">
+				<img src="static\image.jpg" alt="Image">
+			  </div>
+		{% endif %}
+		{% if predictions %}
+		<a href="#" download="predicted_sales.csv" id="csv-download-btn">Download CSV</a>
+		  <h2>Predicted Sales for the Next 12 Months:</h2>
+		  <table>
+			<thead>
+			  <tr>
+				<th>Month</th>
+				<th>Predicted Sales</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  {% for prediction in predictions %}
+				<tr>
+				  <td>{{ prediction[0] }}/ {{ year }} 📅</td>
+				  <td>${{ prediction[1]|round(2) }} 💰</td>
+				</tr>
+			  {% endfor %}
+			</tbody>
+		  </table>
+		  <button onclick="window.location.href='result.html'"  id="csv-download-btn">View Future Trends</button>
+			{% endif %}
+	  </div>	  
+	</div>
+	<script>
+		const csvDownloadBtn = document.getElementById('csv-download-btn');
+		csvDownloadBtn.addEventListener('click', () => {
+			const table = document.querySelector('table');
+			const rows = Array.from(table.querySelectorAll('tr'));
+			const csv = rows.map(row => {
+				const cells = Array.from(row.querySelectorAll('th,td'));
+				return cells.map(cell => cell.innerText).join(',');
+			}).join('\n');
+			const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement('a');
+			link.href = url;
+			link.setAttribute('download', 'predicted_sales.csv');
+			link.click();
+		});
+	</script>
+	
+	
+  </body>
+</html>
