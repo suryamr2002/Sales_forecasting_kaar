@@ -2,17 +2,19 @@
 ## 🛍️ Sales Prediction Web App
 
 This is a Flask web application that uses a trained machine learning model to predict sales for a future date based on user input.
+The Sales Prediction Web App is a Flask web application that uses the trained machine learning model to predict sales for a future date based on user input. 
+The application has a simple interface that allows users to input a future date and get the predicted sales amount.
 
 ## 📦 Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/sales-prediction-web-app.git`
-2. Install the required packages: `pip install -r requirements.txt`
+Clone the repository: `https://github.com/suryamr2002/Sales_forecasting_kaar.git`
+
 
 ## 🚀 Usage
 
 To run the web app, run the following command in your terminal:
 
-python app.py
+```python app.py```
 
 
 Once the app is running, you can access it in your browser at `http://localhost:5000/`.
@@ -27,9 +29,6 @@ To train a new machine learning model, you can run the `train_model.py` script.
 
 Contributions are welcome! If you find a bug or want to add a new feature, please open an issue or submit a pull request.
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -43,9 +42,16 @@ The Flask app has three routes:
 
 The `train_model.py` script is used to train the machine learning model. The trained model is saved as a pickle file (`sales_prediction_model.pkl`) and loaded in the Flask app using the `pickle.load()` method.
 
+## Jupyter notebook
+
+The Jupyter notebook `Sales_forecasting.ipynb` contains the code for training the machine learning model. It uses the pandas library to load the dataset and preprocess it. Then it uses the sklearn library to split the dataset into training and testing sets and train a Random Forest Regressor model on the training data. Finally, it evaluates the model on the testing data and saves the trained model as a pickle file (`sales_prediction_model.pkl`).
+
+
+---
+
 ## 📊 Dataset
 
-The machine learning model was trained on the [Superstore Sales Dataset](https://community.tableau.com/s/article/Superstore-Sales), which contains sales data for a fictional superstore in the United States. The dataset includes information about the date, product category, and sales amount for each transaction.
+The machine learning model was trained on a sales dataset obtained from Kaggle. The dataset includes information about the date, state, product category, sub-category, product name, and sales amount for each transaction.
 
 ---
 
