@@ -1,9 +1,7 @@
 # Sales_forecasting_kaar
 ## 🛍️ Sales Prediction Web App
 
-This is a Flask web application that uses a trained machine learning model to predict sales for a future date based on user input.
-The Sales Prediction Web App is a Flask web application that uses the trained machine learning model to predict sales for a future date based on user input. 
-The application has a simple interface that allows users to input a future date and get the predicted sales amount.
+The Sales Prediction Web Application, built using Flask, offers a powerful predictive tool for estimating sales figures on forthcoming dates. The core functionality revolves around leveraging a meticulously trained machine learning model. This model, carefully developed and fine-tuned, utilizes historical sales data to forecast future sales with a high degree of accuracy.
 
 ## 📦 Installation
 
